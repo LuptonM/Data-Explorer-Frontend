@@ -1,0 +1,49 @@
+.axisDraggableColumn {
+  align-content: center;
+  align-items: center;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  background-color: purple;
+  color: white;
+  padding: 5px;
+  border-radius: 6px;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "columnName arrow";
+}
+
+.columnName {
+  grid-area: columnName;
+  display: flex;
+  align-content: center;
+}
+
+.arrow {
+  grid-area: arrow;
+  display: flex;
+  align-items: flex-end;
+}
+
+.AxisDropDown {
+  position: absolute;
+
+  width: 50%;
+  z-index: 1;
+  background-color: #f1f1f1;
+  width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.AxisdropDownWrapper:hover {
+  background-color: #8b8e8c;
+}
+
+.selectorContents:hover {
+  display: inline-block;
+}
+
+.AxisdropDownWrapper {
+}
+.arrowWrapper {
+  display: inline-block;
+}

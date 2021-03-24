@@ -1,0 +1,928 @@
+.data-explorer-container {
+  display: grid;
+  grid-template-columns: 0.4fr 1.6fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "Data Graph-Area";
+  height: 100%;
+}
+
+.Data {
+  grid-area: Data;
+  height: 100vh;
+}
+
+.Graph-Area {
+  grid-area: Graph-Area;
+}
+
+.Axis-graph-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.8fr 4fr;
+  gap: 0px 0px;
+  grid-template-areas: "Axis-areas" "Graphing-area";
+  height: 100%;
+}
+
+.Axis-areas {
+  grid-area: Axis-areas;
+}
+.Graphing-area {
+  grid-area: Graphing-area;
+}
+
+.axis-filter-wrapper {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "FilterZone AxisZone";
+  height: 100%;
+}
+
+.FilterZone {
+  grid-area: FilterZone;
+  margin: 10px;
+}
+
+.AxisZone {
+  grid-area: AxisZone;
+  padding-right: 10px;
+}
+
+.axis-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.3em 0px;
+  grid-template-areas: "XaxisZone" "YaxisZone";
+  height: 100%;
+  justify-items: center;
+}
+
+.XaxisZone {
+  grid-area: XaxisZone;
+  margin-top: 10px;
+}
+
+.YaxisZone {
+  grid-area: YaxisZone;
+  align-content: center;
+}
+
+.dragArea {
+  border: 1px solid #a7aba9;
+  height: 50px;
+  background-color: white;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 1px 1px 1px 0;
+}
+
+.axisLabel {
+  width: 100px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  border: 1px solid #a7aba9;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.dragArea {
+  width: 1200px;
+  border-radius: 0px 5px 5px 0px;
+  padding-top: 10px;
+}
+
+.columnSelectorWrapper {
+  position: relative;
+}
+
+.filterDropZone {
+  border: 1px solid #a7aba9;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border-radius: 5px;
+  display: table;
+}
+
+.filterIcon {
+  height: 1.5em;
+  width: 1.5em;
+  padding: 4px;
+  position: absolute;
+  fill: #797980;
+}
+
+.filterDropZoneInnerDiv {
+  height: 100%;
+  width: 99%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-container {
+  display: grid;
+  grid-template-columns: 0.2fr 1.8fr;
+  grid-template-rows: 0.3fr 2.4fr 0.3fr;
+  gap: 0px 0px;
+  grid-template-areas: "Yaxis-Label Graph-Title" "Yaxis-Label Graph" "Yaxis-Label Xaxis-Label";
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.Graph-Title {
+  grid-area: Graph-Title;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 100%;
+}
+
+.Xaxis-Label {
+  grid-area: Xaxis-Label;
+  display: flex;
+  align-items: flex-start;
+  justify-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.Graph {
+  grid-area: Graph;
+  width: 100%;
+
+  height: 100%;
+}
+
+.navigation-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.5fr 6.7fr;
+  gap: 0px 0px;
+  grid-template-areas: "Navigation Navigation" "dataTabWrapper dataTabWrapper";
+  width: 100%;
+  height: 100%;
+  max-width: 240px;
+  min-width: 200px;
+}
+
+.dataTabWrapper {
+  grid-area: dataTabWrapper;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.6fr 3fr 0.9fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "Search-Filter Search-Filter" "Draggable-Columns Draggable-Columns" "Colours Colours" "Size Size" "Shapes Shapes";
+  width: 100%;
+  height: 100%;
+}
+
+.graphTabWrapper {
+  grid-area: graphTabWrapper;
+  display: grid;
+  width: 100%;
+  display: none;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.9fr 1.1fr;
+  gap: 0px 0px;
+  grid-template-areas: "GraphSelect" "AdditionalGraphOptions";
+}
+
+.Navigation {
+  grid-area: Navigation;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "tab-container";
+  align-items: end;
+}
+
+.Search-Filter {
+  grid-area: Search-Filter;
+  padding-left: 25px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.draggableColumnList {
+  list-style-type: none;
+}
+.Draggable-Columns {
+  grid-area: Draggable-Columns;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 300px;
+  margin-top: 5px;
+}
+
+.Colours {
+  grid-area: Colours;
+}
+
+.Size {
+  grid-area: Size;
+}
+
+.Shapes {
+  grid-area: Shapes;
+}
+
+.draggableColumn {
+  padding: 5px;
+  background-color: #be7ffd;
+  border-radius: 10px;
+  margin: 5px;
+  color: white;
+  cursor: grab;
+}
+
+.searchWrapper {
+  background: transparent;
+  width: 80%;
+  height: 30px;
+  border: 1px solid #a7aba9;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1.6fr 0.4fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "searchInput searchIconWrapper";
+}
+
+.searchIconWrapper {
+  width: 18px;
+  height: 18px;
+  fill: #7c7c84;
+  padding-right: 3px;
+  align-items: center;
+}
+
+.searchInput {
+  width: 100%;
+}
+
+#search {
+  width: 95%;
+  height: 29px;
+  margin: 0 0 0 5px;
+  background: transparent;
+  color: gray;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.colourDropZone {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.colourIconWrapper {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  z-index: 1;
+}
+.colourIconWrapper:hover {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+
+  transition-property: width;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.dataBorder {
+  padding-top: 10px;
+  border-top: 1px solid #b7b4b4;
+  border-radius: 0.2px;
+  border-bottom: 1px solid #b7b4b4;
+  height: 100%;
+}
+
+.borderWrapper {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  height: 100px;
+}
+.borderWrapper {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  height: 100px;
+}
+
+.sizeDropZone {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.sizeBorder {
+  padding-top: 10px;
+
+  border-radius: 0.2px;
+  border-bottom: 1px solid #b7b4b4;
+  height: 100%;
+}
+
+.sizeIconWrapper {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  z-index: 1;
+}
+.sizeIconWrapper:hover {
+  width: 25px;
+  height: 25px;
+  transition-property: width;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  cursor: pointer;
+}
+
+.sizeDropZoneInnerDiv {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.colourDropZoneInnerDiv {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab-container {
+  grid-area: "tab-container";
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "DataTab GraphTab";
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+}
+
+.DataTab {
+  grid-area: DataTab;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  border-top: 1px solid #b9b6b6;
+  border-right: 1px solid #b9b6b6;
+  padding-bottom: 5px;
+}
+
+.GraphTabInactive {
+  grid-area: GraphTab;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  border-bottom: 1px solid #b9b6b6;
+  padding-bottom: 5px;
+}
+
+.DataTabInactive {
+  grid-area: DataTab;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  border-bottom: 1px solid #b9b6b6;
+  padding-bottom: 5px;
+}
+
+.GraphTab {
+  grid-area: GraphTab;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px;
+  border-top: 1px solid #b9b6b6;
+  border-left: 1px solid #b9b6b6;
+  padding-bottom: 5px;
+}
+
+.GraphTabInactive:hover {
+  background-color: #be7ffd;
+  color: white;
+  border-top-right-radius: 5px;
+  cursor: pointer;
+}
+
+.DataTabInactive:hover {
+  background-color: #be7ffd;
+  color: white;
+  border-top-left-radius: 5px;
+  cursor: pointer;
+}
+
+#graphTitle {
+  width: 100%;
+  height: 29px;
+  margin: 0 0 0 5px;
+  background: transparent;
+  color: #000000;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  text-align: center;
+}
+
+#graphTitle:hover {
+  border: 1px solid #d0cdcd;
+  border-radius: 3px;
+}
+
+#xaxisLabel {
+  width: 100%;
+  height: 29px;
+  margin: 0 0 0 5px;
+  background: transparent;
+  color: #000000;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+}
+
+#xaxisLabel:hover {
+  border: 1px solid #d0cdcd;
+  border-radius: 3px;
+}
+
+.YaxisContainer {
+    grid-area: Yaxis-Label;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    min-width: 50px;
+}
+.Yaxis-Label {
+    position:absolute;
+    min-width: 500px;
+    transform: rotate(-90deg);
+}
+#yaxisLabel {
+  width: 100%;
+  height: 29px;
+  margin: 0 0 0 5px;
+  background: transparent;
+  color: #000000;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  
+}
+
+#yaxisLabel:hover {
+  border: 1px solid #d0cdcd;
+  border-radius: 3px;
+}
+
+.arrow {
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.GraphSelect {
+  grid-area: GraphSelect;
+  height: 100%;
+}
+.AdditionalGraphOptions {
+  grid-area: AdditionalGraphOptions;
+  width: 100%;
+}
+
+#draggable-div {
+  background-color: #252525;
+  width: 100px;
+  height: 100px;
+  cursor: move;
+  background-color: #e53495;
+  border-radius: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50);
+}
+
+.graphType-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 8px 8px;
+  grid-template-areas: "Graph1 Graph2" "Graph3 Graph4" "Graph5 Graph6" "Graph7 Graph8";
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+  grid-area: graphType-container;
+}
+
+.Graph1 {
+  grid-area: Graph1;
+}
+
+.Graph2 {
+  grid-area: Graph2;
+}
+
+.Graph3 {
+  grid-area: Graph3;
+}
+
+.Graph4 {
+  grid-area: Graph4;
+}
+
+.Graph5 {
+  grid-area: Graph5;
+}
+
+.Graph6 {
+  grid-area: Graph6;
+}
+
+.Graph7 {
+  grid-area: Graph7;
+}
+
+.Graph8 {
+  grid-area: Graph8;
+}
+
+.Graphs {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border: 1px solid #e4dfdf;
+  border-radius: 2px;
+  z-index: 3;
+}
+
+.Graphs:hover {
+  border: 1.5px solid #8595f7;
+  cursor: pointer;
+}
+
+.draggableSidebar-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.3fr 1.7fr;
+  gap: 0px 0px;
+  grid-template-areas: "DragHandler" "graphType-container";
+  z-index: 2;
+  height: 450px;
+  width: 220px;
+  border-radius: 10px;
+  border: solid 2px grey;
+  align-items: center;
+  justify-items: center;
+  position: absolute;
+  background-color: white;
+  transform: translateX(-100%);
+  left: 99.5%;
+  top: 20%;
+  box-sizing: content-box;
+}
+
+.DragHandler {
+  grid-area: DragHandler;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: center;
+  background-color: #be7ffd;
+  min-height: 50px;
+  max-height: 70px;
+  cursor: move;
+  border-radius: 7px 7px 0px 0px;
+}
+
+.graphIconWrapper {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.moveable-line {
+  position: absolute !important;
+  transform-origin: 0px 0.5px !important;
+  background: none !important;
+}
+
+.moveable-control.moveable-origin {
+  border-color: none !important;
+  background: none !important;
+  display: hidden !important;
+  z-index: -10 !important;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.axisDraggableColumn {
+  align-content: center;
+  align-items: center;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  background-color: #be7ffd;
+  color: white;
+  padding: 5px;
+  border-radius: 6px;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "columnName Arrow";
+  min-width: 160px;
+}
+
+.columnName {
+  grid-area: columnName;
+  display: flex;
+  align-content: center;
+}
+
+.Arrow {
+  grid-area: Arrow;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.axisDraggableColumnWrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.filterDraggableColumnWrapper {
+  display: inline-block;
+}
+
+.AxisDropDown {
+  position: absolute;
+  border-radius: 0px 0px 6px 6px;
+  border: 1px solid #cec6c6;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: calc(100% - 2px);
+}
+.FilterDropDown {
+  position: absolute;
+  border-radius: 0px 0px 6px 6px;
+  border: 1px solid #cec6c6;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+  max-height: 200px;
+}
+.FilterDropDown-hidden {
+  position: absolute;
+  border-radius: 0px 0px 6px 6px;
+  border: 1px solid #cec6c6;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.AxisDropDown a:hover {
+  background-color: #ecf3ef;
+  cursor: pointer;
+}
+
+.axisModification {
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.axisDraggableColumn-active {
+  align-content: center;
+  align-items: center;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  background-color: #be7ffd;
+  color: white;
+  padding: 5px;
+  min-width: 160px;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "columnName Arrow";
+  border-radius: 6px 6px 0px 0px;
+}
+
+
+/* The tickBoxContainer */
+.tickBoxContainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.tickBoxContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.tickBoxContainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.tickBoxContainer input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.tickBoxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.tickBoxContainer .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.checkBoxWrapper {
+    display: flex;
+    height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+}
+
+.viewport {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.item {
+  height: 20px;
+}
+
+input {
+  text-align: center;
+  border: 1px solid #6c757d;
+}
+
+input[type="number"] {
+  -webkit-appearance: textfield !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.numericWrapper {
+  
+  
+  height: 25px;
+ 
+  padding-top:10px;
+  padding-bottom:10px;
+
+  display: flex;
+  flex-direction: row;
+  
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+
+.num {
+    height: 100%;
+    width: 65px;   
+    font-size: 18px;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    flex: 1;
+}
+.toWrapper {
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+   
+    
+    flex: 0.5;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom:2px
+}

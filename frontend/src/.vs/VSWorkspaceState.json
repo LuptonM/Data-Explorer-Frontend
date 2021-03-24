@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Components",
+    "\\Components\\DataExplorer",
+    "\\Components\\DataExplorer\\AxisLabels",
+    "\\Components\\DataExplorer\\filter",
+    "\\Components\\DataTable",
+    "\\Components\\Pagination",
+    "\\Components\\Sidebar",
+    "\\Components\\UploadData",
+    "\\Functions"
+  ],
+  "SelectedNode": "\\Components\\UploadData\\UploadButton.js",
+  "PreviewInSolutionExplorer": false
+}
